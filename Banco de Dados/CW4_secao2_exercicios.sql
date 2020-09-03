@@ -92,3 +92,10 @@ select medicacao.id, medicacao.data, medicacao.hora, enfermeiro.nome, paciente.n
 		order by medicacao.id
     ;
     
+
+update medicacao
+    set enfermeiro_coren = 22222
+    where id = 1
+;
+
+select *  from medicacao where id = 1;
