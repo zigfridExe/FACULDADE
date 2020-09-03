@@ -80,8 +80,6 @@ desc aluno;
 desc disciplina;
 desc nota;
 
--- estudar funçoes com urgencia
-
 create function fn_media (x decimal(3,1), y decimal(3,1))
 returns decimal (3,1)
 return (x * 0.4) + (y * 0.6);
@@ -91,8 +89,25 @@ inner join aluno
     on Nota.aluno_ra = aluno.ra
 inner join disciplina
     on nota.disciplina_id = disciplina.id
-where fn_media (nota_p1, nota_p2) >= 0.0
-    and fn_media (nota_p1, nota_p2) <= 0.0;
+where fn_media (nota_p1, nota_p2) >= 4.0
+    and fn_media (nota_p1, nota_p2) <= 6.9;
 
 
 drop function fn_media;
+
+
+create procedure proc_mediaexame (var_disciplinaid int)
+    select fn_media (nota_p1, nota_p2) as "Media Exame", disciplina.nome as "Materia"
+    from nota
+    inner join disciplina
+    on disciplina.id = nota.disciplina_id
+    where disciplina_id = var_disciplinaid
+        and fn_media (nota_p1, nota_p2) >= 4.0
+        and fn_media (nota_p1, nota_p2) <= 6.9;
+        
+        
+call proc_mediaexame(1);
+
+drop procedure proc_mediaexame;
+
+
