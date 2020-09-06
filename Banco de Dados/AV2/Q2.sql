@@ -92,6 +92,7 @@ SELECT
 (SELECT COUNT(id_produto) FROM VENDAS WHERE id_produto = 4 AND id_filme = 99) AS "ISENTO_CRIANÇAS"
 FROM VENDAS WHERE id_filme = 99 GROUP BY TOT_INGR;
 
+
 -- Resposta (D)
 -- na minha opniao a errada pois a primeira subconsulta a sintaxi esta incorreta
 SELECT
