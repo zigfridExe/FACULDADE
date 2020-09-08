@@ -1,0 +1,1 @@
+# aula sobre operações aritméticas

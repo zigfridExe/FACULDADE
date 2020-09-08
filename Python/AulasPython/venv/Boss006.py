@@ -1,0 +1,15 @@
+print('===========BOSS06===========')
+nome = str(input('Quem é você: '))
+valor1 = int(input('Digite o primeiro valor: '))
+valor2 = int(input('Digite o segundo valor: '))
+resultado = valor1 + valor2
+print('A soma entre o valor {} e {} é {} senhor {}'.format(valor1, valor2, resultado, nome))
+
+print('========BOSS06_BONUS=========')
+print('Ele é um numero e letras: ', nome.isalnum())
+print('Ele é caracter alfabetico: ', nome.isalpha())
+print('Ele está minúsculo: ', nome.islower())
+print('Ele pode ser exibido em tela: ', nome.isprintable())
+print('Ele está em maiúsculo: ', nome.isupper())
+print(type(valor1))
+print(type(valor2))
