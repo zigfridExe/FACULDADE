@@ -1,6 +1,6 @@
-login = input("userpy")
-senha = input("teste123")
+login = input("Login: ")
+senha = input("Senha: ")
 if login == "userpy" and senha == "teste123":
-    print("Bem-vindo userpy01")
+    print("Bem-vindo {}".format(login))
 else:
-    print("Login falhou, verifique sua senha e tente novamente")
+    print("O login {} falhou, verifique sua senha {} e tente novamente".format(login, senha))
