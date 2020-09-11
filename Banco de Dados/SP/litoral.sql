@@ -111,3 +111,73 @@ create view v_passeio as
 ;
 
 select * from v_passeio;
+
+create table if not exists vendas(
+	Numero int not null auto_increment,
+    DestinoId int not null,
+    Embarque date,
+    QTD int not null,
+    Primary key (Numero),
+    Foreign key (DestinoId) References Destino(ID)
+		on delete restrict
+        on update cascade
+);
+
+insert into vendas 
+	values
+		(0,1,20180203,3),
+        (0,7,20180203,3),
+        (0,5,20180203,1)
+;
+select * from vendas;
+alter table destino
+	add column Valor decimal(5,2);
+
+select * from destino;
+
+truncate Destino;
+
+insert into destino (nome, valor)
+	values
+		("Ilha Dourada", 100.00),
+        ("Ilha D'areia fina", 120.00),
+        ("Ilha Encantada", 80.00),
+        ("Ilha dos Ventos", 90.00),
+        ("Ilhinha", 100.00),
+        ("Ilha Torta", 150.00),
+        ("Ilha dos Sonhos", 120.000),
+        ("Ilha do Sono", 180.00)
+;
+-- criando a função
+create function fn_desc(x decimal(5,2), y int)
+	returns decimal(5,2)
+    return ((x*y)*0.7)
+;
+-- o dia em que a função funcionou
+select 
+	(fn_desc(destino.valor, vendas.QTD)) as "Valor com desconto",
+	destino.nome as "destino",
+    vendas.Qtd as "Passagens"
+    from destino
+	inner join vendas
+		on vendas.destinoId = destino.id
+;
+SHOW function status;
+
+-- Criando a PROCEDURE
+CREATE procedure proc_desc (VAR_VendasNumero int)
+	select 
+		(fn_desc(destino.valor, vendas.QTD)) as "Valor com desconto",
+		destino.nome as "destino",
+		vendas.Qtd as "Passagens",
+        vendas.Embarque
+    from 
+		destino
+	inner join 
+		vendas
+	on vendas.destinoId = destino.id
+	where Numero = var_VendasNumero;
+;
+drop procedure proc_desc;
+call proc_desc(1);
+show procedure status;
