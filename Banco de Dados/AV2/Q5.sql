@@ -19,6 +19,11 @@ create database forum
 
 use forum;
 
+create table ProcAtivos (
+    id int not null auto_increment primary key,
+    CPFid bigint not null
+);
+
 create table CPFAtivo (
     id int not null auto_increment primary key,
     CPFid bigint not null
@@ -45,6 +50,17 @@ insert into CPFAtivo (CPFid) values
     (23456789012),
     (34567890123),
     (45678901234);
+    
+select * from cpfativos; 
+
+insert into ProcAtivos (CPFid) values
+    (012345678901),
+    (12345678901),
+    (23456789012),
+    (34567890123),
+    (45678901234);
+    
+select * from procativo;
 
 insert into IRDivida (CPFid) values
     (012345678901),
@@ -53,6 +69,8 @@ insert into IRDivida (CPFid) values
     (34567890123),
     (45678901234);
 
+select * from irdivida;
+
 insert into BOAtivo (CPFid) values
     (012345678901),
     (12345678901),
@@ -60,6 +78,7 @@ insert into BOAtivo (CPFid) values
     (34567890123),
     (45678901234);
 
+select * from BOAtivo;
 
 insert into FichCriminal (CPFid) values
     (012345678901),
@@ -68,6 +87,11 @@ insert into FichCriminal (CPFid) values
     (34567890123),
     (45678901234);
 
+select * from FichCriminal;
+truncate procativos;
+truncate boativo;
+truncate irdivida;
+truncate fichcriminal;
 
 -- Resposta (A)
 -- na minha opniao errada pois a primeira subconsulta em where nos remete ao erro de regra de negocio
@@ -87,7 +111,7 @@ WHERE
         AND 
             CPFID NOT IN (SELECT CPFID FROM FichCriminal);
 
---resposta (B)
+-- resposta (B)
 -- na minha opniao a correta
 SELECT 
     CPFID 
