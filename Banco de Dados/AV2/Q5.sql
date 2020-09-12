@@ -67,3 +67,90 @@ insert into FichCriminal (CPFid) values
     (23456789012),
     (34567890123),
     (45678901234);
+
+
+-- Resposta (A)
+-- na minha opniao errada pois a primeira subconsulta em where nos remete ao erro de regra de negocio
+
+SELECT 
+    CPFID 
+FROM 
+    CPFAtivo 
+WHERE 
+    CPFID NOT IN (012345678901, 12345678901, 23456789012, 34567890123, 45678901234)
+        AND 
+            CPFID NOT IN (SELECT CPFID FROM ProcAtivos) 
+        AND 
+            CPFID NOT IN (SELECT CPFID FROM IRDivida) 
+        AND 
+            CPFID NOT IN (SELECT CPFID FROM BOAtivo) 
+        AND 
+            CPFID NOT IN (SELECT CPFID FROM FichCriminal);
+
+--resposta (B)
+-- na minha opniao a correta
+SELECT 
+    CPFID 
+FROM 
+    CPFAtivo 
+    WHERE 
+        CPFID IN (012345678901, 12345678901, 23456789012, 34567890123, 45678901234) 
+        AND 
+            CPFID NOT IN (SELECT CPFID FROM ProcAtivos) 
+        AND 
+            CPFID NOT IN (SELECT CPFID FROM IRDivida)
+        AND 
+            CPFID NOT IN (SELECT CPFID FROM BOAtivo) 
+        AND 
+            CPFID NOT IN (SELECT CPFID FROM FichCriminal);
+
+-- resposta (C)
+-- na minha opniao errada pois as subconsultas depois do where nos remete ao erro de regra de negocio
+
+SELECT 
+    CPFID 
+FROM 
+    CPFAtivo 
+WHERE 
+    CPFID NOT IN (012345678901, 12345678901, 23456789012, 34567890123, 45678901234) 
+        AND 
+            CPFID IN (SELECT CPFID FROM ProcAtivos) 
+        AND 
+            CPFID IN (SELECT CPFID FROM IRDivida) 
+        AND 
+            CPFID IN (SELECT CPFID FROM BOAtivo) 
+        AND
+            CPFID IN (SELECT CPFID FROM FichCriminal);
+
+-- Resposta (D)
+-- na minha opniao errada pois os comparativos <> nao sao utilizado fora do parenteses em uma subconsulta
+SELECT 
+CPFID 
+FROM CPFAtivo 
+WHERE CPFID = (012345678901, 12345678901, 23456789012, 34567890123, 45678901234) 
+        AND 
+            CPFID <> (SELECT CPFID FROM ProcAtivos) 
+        AND 
+            CPFID <> (SELECT CPFID FROM IRDivida) 
+        AND 
+            CPFID <> (SELECT CPFID FROM BOAtivo) 
+        AND 
+            CPFID <> (SELECT CPFID FROM FichCriminal);
+
+-- Resposta (D)
+-- na minha opniao errada pois os comparativos <> nao sao utilizado fora do parenteses em uma subconsulta
+
+SELECT 
+    CPFID 
+FROM 
+    CPFAtivo 
+WHERE 
+    CPFID = (012345678901, 12345678901, 23456789012, 34567890123, 45678901234) 
+        AND 
+            CPFID = (SELECT CPFID FROM ProcAtivos) 
+        AND 
+            CPFID = (SELECT CPFID FROM IRDivida)
+        AND 
+            CPFID = (SELECT CPFID FROM BOAtivo)
+        AND 
+            CPFID = (SELECT CPFID FROM FichCriminal);
