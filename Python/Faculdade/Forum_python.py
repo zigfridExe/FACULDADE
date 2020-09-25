@@ -1,19 +1,23 @@
 def adicionar():
-    for i in range(1, 6):
+    for i in range(1, 3):
         nomes.append(input(f'Qual o {i}º iten da lista? '))
 
 
 def remover():
-    if not nomes:
-        print('lista vazia')
-    else:
-        nomes.remove(input('Qual nome deseja remover? '))
+    itenr = input('Qual nome deseja remover? ')
+    if itenr in nomes:
+        nomes.remove(itenr)
+    elif itenr != len(nomes):
+        print('Não está na lista')
+    elif not nomes:
+        print('Lista está vazia')
 
 
 nome = input('Qual o seu nome? ')
 nomes = []
 opcao = 0
 while opcao != 5:
+    print('======INICIO======')
     print('Itens na Lista')
     print(nomes)
     print('1 Para adicionar')
@@ -25,7 +29,7 @@ while opcao != 5:
         adicionar()
     elif opcao == 2:
         remover()
-    elif opcao == 3:
+    elif opcao >= 3:
         break
     else:
         print('ninja')
