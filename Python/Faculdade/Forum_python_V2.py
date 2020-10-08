@@ -7,20 +7,34 @@
 
 #   Utilize a opção 3 para encerrar o programa.
 
+def show():
+    if not nomes:
+        print('LISTA VAZIA')
+    else:
+        for c in nomes:
+            print(c)
+
 
 def adicionar():
-    for i in range(1, 3):
-        nomes.append(input(f'Qual o {i}º iten da lista? '))
+    qtd = int(input('Quantos itens deseja adicionar? '))
+    for ad in range(1, qtd+1):
+        add = str(input('Qual item deseja adicionar? '))
+        nomes.append(add)
 
 
 def remover():
-    itenr = input('Qual nome deseja remover? ')
-    if itenr in nomes:
-        nomes.remove(itenr)
-    elif itenr not in nomes:
-        print('Não está na lista')
-    elif not nomes:
-        print('Lista está vazia')
+    if not nomes:
+        print('A lista está vazia')
+
+    n = input('Quantos itens deseja remover? ')
+    n = int(n)
+    for c in range(1, n+1):
+        iten = input(f'{c}º iten a ser removido? ')
+        if iten not in nomes:
+            print(f'O iten {iten} não está na lista')
+        else:
+            nomes.remove(iten)
+            print(f'{iten} removido')
 
 
 nome = input('Qual o seu nome? ')
@@ -29,7 +43,7 @@ opcao = 0
 while opcao != 5:
     print('======INICIO======')
     print('Itens na Lista')
-    print(nomes)
+    show()
     print('1 Para adicionar')
     print('2 para Remover')
     print('3 Para Sair')
